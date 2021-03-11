@@ -8,18 +8,22 @@ import (
 )
 
 type Generate struct {
-	ctx        context.Context
-	logger     *zap.Logger
-	env        env.Env
-	repository string
+	ctx     context.Context
+	logger  *zap.Logger
+	env     env.Env
+	options Options
 }
 
-func New(ctx context.Context, logger *zap.Logger, env env.Env, repository string) (Generate, error) {
+type Options struct {
+	Repository string
+}
+
+func New(ctx context.Context, logger *zap.Logger, env env.Env, options Options) (Generate, error) {
 	generate := Generate{
-		ctx:        ctx,
-		logger:     logger,
-		env:        env,
-		repository: repository,
+		ctx:     ctx,
+		logger:  logger,
+		env:     env,
+		options: options,
 	}
 
 	// Check for repo here
